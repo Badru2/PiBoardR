@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,12 +22,23 @@ class ProfileController extends Controller
         $accept = $request->user()->email == "admin@gmail.com";
 
         $user = $request->user();
-        $tweets = $user->tweets()->with('likes', 'user')->latest('id')->get();
+        $tweets = $user->tweets()->with('likes', 'user', 'favorites')->latest('id')->get();
+
+        $user = Auth::user();
+
+        // Mengambil tweet yang sudah di-like oleh pengguna
+        $favoritedTweets = Tweet::whereHas('favorites', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->with(['favorites' => function ($query) {
+            $query->orderByDesc('id');
+        }])->get();
+
 
         return view('profile.profile', [
             'user' => $user,
             'tweets' => $tweets,
             'accept' => $accept,
+            'favoritedTweets' => $favoritedTweets,
         ]);
     }
 
@@ -35,12 +47,34 @@ class ProfileController extends Controller
         $user = User::with('tweets')->where('name', $name)->first();
         if (!$user) abort(404);
 
-        $tweets = $user->tweets()->with('likes', 'user')->latest('id')->get();
+        $tweets = $user->tweets()->with('likes', 'user', 'favorites')->latest('id')->get();
+
+        $favoritedTweets = Tweet::whereHas('favorites', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->with(['favorites' => function ($query) {
+            $query->orderByDesc('id');
+        }])->get();
 
         return view('profile.profile', [
             'user' => $user,
             'tweets' => $tweets,
+            'favoritedTweets' => $favoritedTweets,
         ]);
+    }
+
+    public function follow($following_id)
+    {
+        $user = Auth::user();
+
+        if ($user->following->contains($following_id)) {
+            $user->following()->detach($following_id);
+            $msg = ['status' => 'UNFOLLOW'];
+        } else {
+            $user->following()->attach($following_id);
+            $msg = ['status' => "FOLLOW"];
+        }
+
+        return response()->json($msg);
     }
 
 

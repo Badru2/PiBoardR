@@ -1,4 +1,4 @@
-@foreach ($tweets as $tweet)
+@foreach ($favoritedTweets as $tweet)
     <div class="p-3 mb-5 mx-3 lg:w-2/5 xl:w-3/5 lg:mx-auto lg:border-2 lg:border-gray-800 bg-gray-800 relative">
         <div class="flex">
             <div class="me-2">
@@ -60,17 +60,11 @@
                     <source src="{{ asset('/storage/tweets/' . $tweet->file) }}"
                         type="audio/{{ pathinfo($tweet->file, PATHINFO_EXTENSION) }}">
                 </audio>
-            @elseif (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'png' ||
-                    pathinfo($tweet->file, PATHINFO_EXTENSION) == 'jpg' ||
-                    pathinfo($tweet->file, PATHINFO_EXTENSION) == 'jpeg' ||
-                    pathinfo($tweet->file, PATHINFO_EXTENSION) == 'svg' ||
-                    pathinfo($tweet->file, PATHINFO_EXTENSION) == 'gif')
+            @else
                 <!-- gambar -->
                 <img src="{{ asset('/storage/tweets/' . $tweet->file) }}"
                     class="rounded mx-auto w-full max-h-96 2xl:max-h-96 object-cover"
                     onclick="my_modal_{{ $tweet->id }}.showModal()" alt="">
-            @else
-                <div></div>
             @endif
         </div>
 

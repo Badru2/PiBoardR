@@ -27,4 +27,14 @@ class Tweet extends Model
     {
         return $this->likes->where('user_id', Auth::user()->id)->count();
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function is_favorited()
+    {
+        return $this->favorites->where('user_id', Auth::user()->id)->count();
+    }
 }

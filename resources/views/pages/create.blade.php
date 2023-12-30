@@ -27,7 +27,7 @@
 
                 <div>
                     <h2 class="mb-4">CONTENT</h2>
-                    <textarea name="content" id="" cols="30" rows="10" class="bg-slate-700 w-full rounded-lg "></textarea>
+                    <textarea name="content" id="" cols="30" rows="10" class="bg-slate-700 w-full rounded-lg captions"></textarea>
                 </div>
 
                 <div class="flex w-full justify-evenly mt-5">
