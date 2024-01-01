@@ -1,3 +1,5 @@
 <x-app-layout>
-    @include('components.tweets')
+    @foreach ($tweets as $tweet)
+        @include('components.tweets')
+    @endforeach
 </x-app-layout>

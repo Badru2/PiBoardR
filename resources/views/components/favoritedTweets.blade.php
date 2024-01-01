@@ -60,58 +60,46 @@
                     <source src="{{ asset('/storage/tweets/' . $tweet->file) }}"
                         type="audio/{{ pathinfo($tweet->file, PATHINFO_EXTENSION) }}">
                 </audio>
-            @else
+            @elseif (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'png' ||
+                    pathinfo($tweet->file, PATHINFO_EXTENSION) == 'jpg' ||
+                    pathinfo($tweet->file, PATHINFO_EXTENSION) == 'jpeg' ||
+                    pathinfo($tweet->file, PATHINFO_EXTENSION) == 'svg' ||
+                    pathinfo($tweet->file, PATHINFO_EXTENSION) == 'gif')
                 <!-- gambar -->
                 <img src="{{ asset('/storage/tweets/' . $tweet->file) }}"
                     class="rounded mx-auto w-full max-h-96 2xl:max-h-96 object-cover"
                     onclick="my_modal_{{ $tweet->id }}.showModal()" alt="">
+            @else
+                <div></div>
             @endif
         </div>
 
-        <div class="border-black border-t-2 border-b-2 mt-4 flex justify-evenly">
-            {{-- Like --}}
-            <a class="m-2 text-xl cursor-pointer text-danger" onclick="like({{ $tweet->id }}, this)">
-                @if ($tweet->is_liked())
-                    <iconify-icon icon="material-symbols-light:favorite"></iconify-icon>
-                @else
-                    <iconify-icon icon="material-symbols:favorite-outline"></iconify-icon>
-                @endif
-                {{-- {{ $tweet->likes->count() }} --}}
-            </a>
-
-            {{-- Comment --}}
-            {{-- <a onclick="comment_{{ $tweet->id }}.showModal()"
-                class="m-2 text-xl text-white cursor-pointer"><iconify-icon icon="bx:comment"></iconify-icon>
-                {{ $tweet->comments->count() }}
-            </a> --}}
-
-            {{-- Share inactive --}}
-            <a href="{{ route('tweet.show', $tweet->id) }}" class="m-2 text-xl text-white"><iconify-icon
-                    icon="ri:share-line"></iconify-icon></a>
-
-            {{-- Favorite inactive --}}
-            <a class="m-2 text-xl cursor-pointer text-danger" onclick="favorite({{ $tweet->id }}, this)">
-                @if ($tweet->is_favorited())
-                    <iconify-icon icon="material-symbols:bookmark"></iconify-icon>
-                @else
-                    <iconify-icon icon="material-symbols:bookmark-outline"></iconify-icon>
-                @endif
-                {{-- {{ $tweet->likes->count() }} --}}
-            </a>
-        </div>
+        @include('components.action-menu')
 
         {{-- Image Tweet Modal --}}
         <dialog id="my_modal_{{ $tweet->id }}" class="modal">
             {{-- <div class="modal-box w-11/12 max-w-6xl">
-                <div class="modal-action">
-                    <form method="dialog">
-                        <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-2 text-white">✕</button>
-                    </form>
-                </div>
-            </div> --}}
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-4 top-2 text-white">✕</button>
+                </form>
+            </div>
+        </div> --}}
             <div class="modal-box max-w-5xl">
-                <img src="{{ asset('/storage/tweets/' . $tweet->file) }}" class="w-full"
-                    onclick="my_modal_{{ $tweet->id }}.showModal()" alt="">
+                <img src="{{ asset('/storage/tweets/' . $tweet->file) }}" class="w-full" alt="">
+            </div>
+            <form method="dialog" class="modal-backdrop bg-transparent border-0">
+                <button></button>
+            </form>
+        </dialog>
+
+
+        <dialog id="comment_{{ $tweet->id }}" class="modal">
+            <div class="modal-box max-w-5xl">
+                <img src="{{ asset('/storage/tweets/' . $tweet->file) }}" class="w-full" alt="">
+
+                <livewire:comments :model="$tweet" />
+
             </div>
             <form method="dialog" class="modal-backdrop bg-transparent border-0">
                 <button></button>

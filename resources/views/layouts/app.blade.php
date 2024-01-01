@@ -68,7 +68,7 @@
 
         <dialog id="search_modal" class="modal">
             <div class="w-4/5 absolute top-2">
-                <div class="px-1 py-3">
+                <div class="px-1 py-1">
                     <form class="mx-auto w-full h-24" action="{{ route('search') }}" method="GET">
                         <div class="relative">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

@@ -10,7 +10,8 @@
         "laravel/breeze": "^1.27",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "usamamuneerchaudhary/commentify": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

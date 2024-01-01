@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
+use Usamamuneerchaudhary\Commentify\Models\Comment;
+use Usamamuneerchaudhary\Commentify\Traits\Commentable;
 
 class Tweet extends Model
 {
     use HasFactory;
+    use Commentable;
 
     protected $guarded = ['id'];
 
@@ -17,6 +20,7 @@ class Tweet extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 
     public function likes()
     {

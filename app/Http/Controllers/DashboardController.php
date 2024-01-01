@@ -12,7 +12,7 @@ class DashboardController extends Controller
      */
     public function __invoke()
     {
-        $tweets = Tweet::with('user', 'likes')->latest('id')->get();
+        $tweets = Tweet::with('user', 'likes', 'favorites')->latest('id')->get();
 
         return view('dashboard', compact('tweets'));
     }

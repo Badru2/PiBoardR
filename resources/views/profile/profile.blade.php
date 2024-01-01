@@ -85,10 +85,14 @@
     <div id="default-tab-content" class="bg-transparent">
         <div class="hidden p-0 m-0 w-full bg-transparent rounded-lg" id="tweets" role="tabpanel"
             aria-labelledby="profile-tab">
-            @include('components.tweets')
+            @foreach ($tweets as $tweet)
+                @include('components.tweets')
+            @endforeach
         </div>
         <div class="hidden p-0 m-0 rounded-lg" id="favorite" role="tabpanel" aria-labelledby="dashboard-tab">
-            @include('components.favoritedTweets')
+            @foreach ($favoritedTweets as $tweet)
+                @include('components.tweets')
+            @endforeach
         </div>
     </div>
     {{-- @else
