@@ -9,11 +9,11 @@
         </div>
         <div>
             <strong>
-                <a href="{{ route('profile.show', $tweet->user->name) }}" class="text-white">
+                <a href="{{ route('profile.show', $tweet->user->name) }}" class="text-white hover:underline">
                     {{ $tweet->user->name }}
                 </a>
             </strong>
-            <p>{{ $tweet->created_at->locale('id')->diffForHumans() }}</p>
+            <p class="text-gray-500">{{ $tweet->created_at->locale('id')->diffForHumans() }}</p>
         </div>
 
         <div class="absolute right-4">
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <p class="captions att py-3">{{ $tweet->content }}</p>
+    <p class="captions att mb-3">{!! $tweet->content !!}</p>
 
     <div class="text-center">
         @if (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'mp4' || pathinfo($tweet->file, PATHINFO_EXTENSION) == 'webm')
@@ -132,4 +132,5 @@
         </form>
     </dialog>
     {{-- Comment Tweet Modal --}}
+
 </div>

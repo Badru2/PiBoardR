@@ -53,4 +53,17 @@
             </form>
         </div>
     </div>
+
+
+    <script src="https://cdn.tiny.cloud/1/ug8k3u0xghcson8wedsmu7tihjbd1mg86xrhsdo9eg662qo9/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            menubar: false,
+            skin: "oxide-dark",
+            content_css: "dark"
+        });
+    </script>
 </x-app-layout>

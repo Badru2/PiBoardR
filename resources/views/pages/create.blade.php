@@ -27,11 +27,12 @@
 
                 <div>
                     <h2 class="mb-4">CONTENT</h2>
-                    <textarea name="content" id="" cols="30" rows="10" class="bg-slate-700 w-full rounded-lg captions"></textarea>
+                    <textarea name="content" id="" cols="30" rows="10" class="bg-slate-700 w-full rounded-lg captions"
+                        id="editor"></textarea>
                 </div>
 
                 <div class="flex w-full justify-evenly mt-5">
-                    <a href="/create"
+                    <a href="{{ route('tweet.create') }}"
                         class="bg-red-700 px-8 py-1 lg:px-12 lg:py-3 rounded-full cursor-pointer hover:bg-red-500">Reset</a>
                     <input type="submit" value="Publish"
                         class="bg-cyan-500 px-8 py-1 rounded-full cursor-pointer hover:bg-cyan-300">
@@ -39,5 +40,17 @@
             </form>
         </div>
     </div>
+
+    <script src="https://cdn.tiny.cloud/1/ug8k3u0xghcson8wedsmu7tihjbd1mg86xrhsdo9eg662qo9/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            menubar: false,
+            skin: "oxide-dark",
+            content_css: "dark"
+        });
+    </script>
 
 </x-app-layout>

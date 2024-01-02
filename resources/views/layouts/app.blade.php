@@ -26,9 +26,20 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/output.css') }}">
 
+    <script>
+        document.querySelectorAll(".captions").forEach(function(el) {
+            let renderedText = el.innerHTML.replace(/#(\w+)/g,
+                "<a href='search?search=%23$1' style='color: #00A9FF; text-decoration: underline'>#$1</a>");
+            el.innerHTML = renderedText;
+        });
+    </script>
+
+    <script src="https://cdn.tiny.cloud/1/ug8k3u0xghcson8wedsmu7tihjbd1mg86xrhsdo9eg662qo9/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
 </head>
 
-<body class="font-sans antialiased bg-gray-900 dark:bg-gray-900">
+<body class="font-sans antialiased bg-gray-900 dark:bg-gray-900 text-white">
     <div class="min-h-screen bg-gray-900">
         @include('components.sidebar-left')
         @include('components.sidebar-right')
@@ -42,7 +53,7 @@
             </header>
         @endif
 
-        <div class="fixed bottom-0 flex justify-evenly bg-gray-800 pt-4 pb-2 z-50 w-full lg:hidden">
+        <div class="fixed bottom-0 flex justify-evenly bg-gray-800 pt-1 pb-1 z-50 w-full lg:hidden">
             <x-bottom-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 <iconify-icon icon="uil:home"></iconify-icon>
             </x-bottom-nav-link>
@@ -103,6 +114,15 @@
 
         <div class="h-24 lg:hidden"></div>
     </div>
+
+    <script>
+        tinymce.init({
+            selector: '#editor',
+            menubar: false,
+            skin: "oxide-dark",
+            content_css: "dark"
+        });
+    </script>
 
     <script>
         document.querySelectorAll(".captions").forEach(function(el) {

@@ -1,6 +1,6 @@
 <x-app-layout>
     @foreach ($users as $user)
-        <div class="flex mx-3 py-4 rounded-lg mb-3 bg-gray-800">
+        <div class="flex mx-3 py-4 lg:w-3/5 lg:mx-auto rounded-lg mb-3 bg-gray-800">
             <a href="{{ route('profile.show', $user->name) }}" class="ms-4">
                 <img class="w-24 h-24 object-cover rounded-full"
                     src="{{ $user->avatar ? asset('images/avatar/' . $user->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) }}"

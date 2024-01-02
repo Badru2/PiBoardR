@@ -23,7 +23,7 @@ class TweetPolicy
      */
     public function view(User $user, Tweet $tweet): bool
     {
-        $accept = $user->level == 'admin' || $user->id == $tweet->user_id;
+        $accept = $user->level == 'admin' || $user->id == $tweet->user_id || $user->level == 'childAdmin';
         return $accept;
     }
 
@@ -48,7 +48,7 @@ class TweetPolicy
      */
     public function delete(User $user, Tweet $tweet): bool
     {
-        $accept = $user->level == 'admin' || $user->id == $tweet->user_id;
+        $accept = $user->level == 'admin' || $user->id == $tweet->user_id || $user->level == 'childAdmin';
         return $accept;
     }
 

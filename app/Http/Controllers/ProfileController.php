@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Favorite;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -31,9 +32,8 @@ class ProfileController extends Controller
         $favoritedTweets = Tweet::whereHas('favorites', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->with(['favorites' => function ($query) {
-            $query->orderByDesc('id');
+            $query->latest('id');
         }])->get();
-
 
         return view('profile.profile', [
             'user' => $user,
@@ -53,7 +53,7 @@ class ProfileController extends Controller
         $favoritedTweets = Tweet::whereHas('favorites', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->with(['favorites' => function ($query) {
-            $query->orderByDesc('id');
+            $query->latest('id');
         }])->get();
 
         return view('profile.profile', [
@@ -116,6 +116,17 @@ class ProfileController extends Controller
         ]);
 
         return redirect('/profile');
+    }
+
+    public function toAdmin($id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        $user->update([
+            'level' => request('level')
+        ]);
+
+        return redirect()->back();
     }
 
     /**

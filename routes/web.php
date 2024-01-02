@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/search/', SearchTweetController::class)->name('search');
     Route::get('/follow/{user_id}', [ProfileController::class, 'follow'])->name('user.follow');
 
+    Route::put('ToAdmin/{id}', [ProfileController::class, 'toAdmin'])->name('toAdmin');
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile/@{name}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
