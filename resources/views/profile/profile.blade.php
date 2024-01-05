@@ -18,7 +18,7 @@
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <a href="route('logout')" class="bg-transparent text-danger"
+                                    <a href="route('logout')" class="bg-transparent text-red-600"
                                         onclick="event.preventDefault();
                                         this.closest('form').submit();">
                                         <i class="bi bi-box-arrow-left"></i><span class="ms-2">Logout</span>

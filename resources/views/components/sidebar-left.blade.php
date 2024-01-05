@@ -3,10 +3,10 @@
     aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto primary-blue-dark">
         <a href="{{ route('dashboard') }}" class="flex items-center ps-2.5 mb-5">
-            <img src="{{ asset('icon_white.svg') }}" class="me-3 h-9" alt="" />
+            <img src="{{ asset('icon_white.svg') }}" class="me-3 h-12" alt="" />
         </a>
         <ul class="space-y-2 font-medium">
-            <li class="my-5">
+            <li class="my-5 mt-12">
                 <a href="{{ route('profile.index') }}"
                     class="flex items-center text-white rounded-lg   dark:hover:bg-gray-700 group">
                     <div class="text-4xl">

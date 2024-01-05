@@ -10,9 +10,15 @@ class DashboardController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        $tweets = Tweet::with('user', 'likes', 'favorites')->latest('id')->get();
+        $tweets = Tweet::with('user', 'likes', 'favorites')->latest('id')->paginate(5);
+
+        if ($request->ajax()) {
+            $view = view('components.tweets-with-foreach', compact('tweets'))->render();
+
+            return response()->json(['html' => $view]);
+        }
 
         return view('dashboard', compact('tweets'));
     }
