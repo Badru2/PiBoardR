@@ -10,7 +10,11 @@
         <div>
             <strong>
                 <a href="{{ route('profile.show', $tweet->user->name) }}" class="text-white hover:underline">
-                    {{ $tweet->user->name }}
+                    {{ $tweet->user->name }} @if ($tweet->user->level == 'admin')
+                        <span class="text-blue-400 ">
+                            <iconify-icon icon="dashicons:yes-alt"></iconify-icon>
+                        </span>
+                    @endif
                 </a>
             </strong>
             <p class="text-gray-500">{{ $tweet->created_at->locale('id')->diffForHumans() }}</p>
@@ -18,8 +22,7 @@
 
         <div class="absolute right-4">
             <div class="dropdown dropdown-left">
-                <label tabindex="0" class="m-1 cursor-pointer text-xl"><iconify-icon
-                        icon="pepicons-pop:dots-y"></iconify-icon></label>
+                <label tabindex="0" class="m-1 cursor-pointer text-xl"><iconify-icon icon="pepicons-pop:dots-y"></iconify-icon></label>
                 <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black rounded-box w-24">
                     @can('delete', $tweet)
                         <li>
@@ -45,11 +48,11 @@
 
     <p class="captions att mb-3">{!! $tweet->content !!}</p>
 
-    <div class="text-center">
+    <div class="text-center mt-3">
         @if (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'mp4' || pathinfo($tweet->file, PATHINFO_EXTENSION) == 'webm')
             <!-- video -->
-            <video id="myVideo" src="{{ asset('/storage/tweets/' . $tweet->file) }}" disablepictureinpicture
-                controlslist="nodownload" controls class="w-full mx-auto rounded"></video>
+            <video id="myVideo" src="{{ asset('/storage/tweets/' . $tweet->file) }}" disablepictureinpicture controlslist="nodownload"
+                controls class="w-full mx-auto rounded"></video>
         @elseif (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'mp3' ||
                 pathinfo($tweet->file, PATHINFO_EXTENSION) == 'ogg' ||
                 pathinfo($tweet->file, PATHINFO_EXTENSION) == 'wav')
@@ -64,8 +67,7 @@
                 pathinfo($tweet->file, PATHINFO_EXTENSION) == 'svg' ||
                 pathinfo($tweet->file, PATHINFO_EXTENSION) == 'gif')
             <!-- gambar -->
-            <img src="{{ asset('/storage/tweets/' . $tweet->file) }}"
-                class="rounded mx-auto w-full max-h-96 2xl:max-h-96 object-cover"
+            <img src="{{ asset('/storage/tweets/' . $tweet->file) }}" class="rounded mx-auto w-full max-h-96 2xl:max-h-96 object-cover"
                 onclick="my_modal_{{ $tweet->id }}.showModal()" alt="">
         @else
             <div></div>
@@ -84,8 +86,8 @@
         </a>
 
         {{-- Comment --}}
-        <a onclick="comment_{{ $tweet->id }}.showModal()"
-            class="m-2 text-xl text-white cursor-pointer"><iconify-icon icon="bx:comment"></iconify-icon>
+        <a onclick="comment_{{ $tweet->id }}.showModal()" class="m-2 text-xl text-white cursor-pointer"><iconify-icon
+                icon="bx:comment"></iconify-icon>
             {{-- {{ $tweet->comments->count() }} --}}
         </a>
 

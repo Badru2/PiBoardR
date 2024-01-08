@@ -6,8 +6,7 @@
             {{-- User Menu --}}
             @if (Auth::user()->id == $user->id || Auth::user()->level == 'admin')
                 <div class="dropdown dropdown-left right-4 top-0 mt-1 absolute">
-                    <label tabindex="0" class="m-1 cursor-pointer text-xl"><iconify-icon
-                            icon="pepicons-pop:dots-y"></iconify-icon>
+                    <label tabindex="0" class="m-1 cursor-pointer text-xl"><iconify-icon icon="pepicons-pop:dots-y"></iconify-icon>
                     </label>
                     <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black rounded-box w-40">
                         @if (Auth::user()->id == $user->id)
@@ -67,6 +66,21 @@
                     {!! $user->bio !!}
                 </p>
 
+            </div>
+        </div>
+
+        <div class="flex mt-3 justify-evenly text-center text-white">
+            <div>
+                <p>Tweets</p>
+                {{ $user->tweets->count() }}
+            </div>
+            <div>
+                <p>Follow</p>
+                {{ $user->following->count() }}
+            </div>
+            <div>
+                <p>Follower</p>
+                {{ $user->follower->count() }}
             </div>
         </div>
     </div>
@@ -133,21 +147,19 @@
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center justify-evenly" id="default-tab"
             data-tabs-toggle="#default-tab-content" role="tablist">
             <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#tweets"
-                    type="button" role="tab" aria-controls="profile" aria-selected="false">My Tweets</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#tweets" type="button"
+                    role="tab" aria-controls="profile" aria-selected="false">My Tweets</button>
             </li>
             <li class="me-2" role="presentation">
-                <button
-                    class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                    id="dashboard-tab" data-tabs-target="#favorite" type="button" role="tab"
-                    aria-controls="dashboard" aria-selected="false">Favorite</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                    id="dashboard-tab" data-tabs-target="#favorite" type="button" role="tab" aria-controls="dashboard"
+                    aria-selected="false">Favorite</button>
             </li>
         </ul>
     </div>
 
     <div id="default-tab-content" class="bg-transparent">
-        <div class="hidden p-0 m-0 w-full bg-transparent rounded-lg" id="tweets" role="tabpanel"
-            aria-labelledby="profile-tab">
+        <div class="hidden p-0 m-0 w-full bg-transparent rounded-lg" id="tweets" role="tabpanel" aria-labelledby="profile-tab">
             @foreach ($tweets as $tweet)
                 @include('components.tweets')
             @endforeach
