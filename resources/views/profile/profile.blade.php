@@ -78,6 +78,21 @@
 
             </div>
         </div>
+
+        <div class="flex mt-3 justify-evenly text-center text-white">
+            <div>
+                <p>Tweets</p>
+                {{ $user->tweets->count() }}
+            </div>
+            <div>
+                <p>Follow</p>
+                {{ $user->following->count() }}
+            </div>
+            <div>
+                <p>Follower</p>
+                {{ $user->follower->count() }}
+            </div>
+        </div>
     </div>
 
     {{-- Avatar Image Modal --}}

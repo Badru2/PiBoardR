@@ -10,7 +10,11 @@
         <div>
             <strong>
                 <a href="{{ route('profile.show', $tweet->user->name) }}" class="text-white hover:underline">
-                    {{ $tweet->user->name }}
+                    {{ $tweet->user->name }} @if ($tweet->user->level == 'admin')
+                        <span class="text-blue-400 ">
+                            <iconify-icon icon="dashicons:yes-alt"></iconify-icon>
+                        </span>
+                    @endif
                 </a>
             </strong>
             <p class="text-gray-500">{{ $tweet->created_at->locale('id')->diffForHumans() }}</p>
@@ -45,7 +49,7 @@
 
     <p class="captions att mb-3">{!! $tweet->content !!}</p>
 
-    <div class="text-center">
+    <div class="text-center mt-3">
         @if (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'mp4' || pathinfo($tweet->file, PATHINFO_EXTENSION) == 'webm')
             <!-- video -->
             <video id="myVideo" src="{{ asset('/storage/tweets/' . $tweet->file) }}" disablepictureinpicture

@@ -4,7 +4,7 @@
 <x-app-layout>
     <div class="py-4 w-full mx-auto sm:px-6 lg:px-8 lg:w-3/5">
         <div class="card w-1/2 grid grid-cols-5 mx-auto bg-dark my-3 mb-4">
-            <a href="/" class="text-white text-4xl p-2 col-span-2"><iconify-icon icon="ep:back"></iconify-icon></a>
+            <a href="{{ route('dashboard') }}" class="text-white text-4xl p-2 col-span-2"><iconify-icon icon="ep:back"></iconify-icon></a>
             <h1 class="text-white my-auto col-span-3">Kembali</h1>
         </div>
         <div class="card-body bg-dark text-light mx-3 bg-gray-800">
@@ -21,15 +21,14 @@
                 </div>
             </div>
 
-            <p class="captions">{{ $tweet->content }}</p>
+            <p class="captions">{!! $tweet->content !!}</p>
 
             <div class="text-center my-3">
                 {{-- <img src="{{ asset('/storage/posts/' . $tweet->image) }}" class="rounded mx-auto w-4/5" alt="">
                 <video src="{{ asset('/storage/posts/' . $tweet->image) }}" controls class="w-full"></video> --}}
                 @if (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'mp4' || pathinfo($tweet->file, PATHINFO_EXTENSION) == 'webm')
                     <!-- Jika itu video -->
-                    <video src="{{ asset('/storage/tweets/' . $tweet->file) }}" controls
-                        class="w-4/5 mx-auto rounded"></video>
+                    <video src="{{ asset('/storage/tweets/' . $tweet->file) }}" controls class="w-4/5 mx-auto rounded"></video>
                 @elseif (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'mp3' ||
                         pathinfo($tweet->file, PATHINFO_EXTENSION) == 'ogg' ||
                         pathinfo($tweet->file, PATHINFO_EXTENSION) == 'wav')
@@ -40,8 +39,7 @@
                     </audio>
                 @else
                     <!-- Jika itu gambar -->
-                    <img src="{{ asset('/storage/tweets/' . $tweet->file) }}" class="rounded mx-auto w-full"
-                        alt="">
+                    <img src="{{ asset('/storage/tweets/' . $tweet->file) }}" class="rounded mx-auto w-full" alt="">
                 @endif
 
             </div>
