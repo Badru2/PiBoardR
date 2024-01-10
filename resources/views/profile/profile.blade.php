@@ -1,47 +1,50 @@
+@section('title', "$user->name")
 <x-app-layout>
     <div class="w-full px-4 py-4 lg:w-3/5 lg:mx-auto lg:bg-gray-800 mb-4 ">
         <div class="lg:border-b-2 lg:border-gray-800 flex relative">
             <h1 class="text-xl text-white lg:text-2xl">Profile</h1>
 
             {{-- User Menu --}}
-            @if (Auth::user()->id == $user->id || Auth::user()->level == 'admin')
-                <div class="dropdown dropdown-left right-4 top-0 mt-1 absolute">
-                    <label tabindex="0" class="m-1 cursor-pointer text-xl"><iconify-icon
-                            icon="pepicons-pop:dots-y"></iconify-icon>
-                    </label>
-                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black rounded-box w-40">
-                        @if (Auth::user()->id == $user->id)
-                            <li>
-                                <a href="{{ route('profile.edit') }}" class="text-warning text-x2l">
-                                    <i class="bi bi-pencil-square"></i> Edit Profil</a>
-                            </li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <a href="route('logout')" class="bg-transparent text-red-600"
-                                        onclick="event.preventDefault();
+            @if (Auth::user())
+                @if (Auth::user()->id == $user->id || Auth::user()->level == 'admin')
+                    <div class="dropdown dropdown-left right-4 top-0 mt-1 absolute">
+                        <label tabindex="0" class="m-1 cursor-pointer text-xl"><iconify-icon
+                                icon="pepicons-pop:dots-y"></iconify-icon>
+                        </label>
+                        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black rounded-box w-40">
+                            @if (Auth::user()->id == $user->id)
+                                <li>
+                                    <a href="{{ route('profile.edit') }}" class="text-warning text-x2l">
+                                        <i class="bi bi-pencil-square"></i> Edit Profil</a>
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <a href="route('logout')" class="bg-transparent text-red-600"
+                                            onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                                        <i class="bi bi-box-arrow-left"></i><span class="ms-2">Logout</span>
-                                    </a>
-                                </form>
-                            </li>
-                        @endif
-                        @if (Auth::user()->level == 'admin')
-                            @if (Auth::user()->id != $user->id)
-                                @if (!(Auth::user()->level == 'admin' && $user->level == 'childAdmin'))
+                                            <i class="bi bi-box-arrow-left"></i><span class="ms-2">Logout</span>
+                                        </a>
+                                    </form>
+                                </li>
+                            @endif
+                            @if (Auth::user()->level == 'admin')
+                                @if (Auth::user()->id != $user->id)
+                                    @if (!(Auth::user()->level == 'admin' && $user->level == 'childAdmin'))
+                                        <li>
+                                            <a onclick="change_to_admin.showModal()">To Admin</a>
+                                        </li>
+                                    @endif
+                                @endif
+                                @if ($user->level == 'childAdmin')
                                     <li>
-                                        <a onclick="change_to_admin.showModal()">To Admin</a>
+                                        <a onclick="remove_from_admin.showModal()">Remove Admin</a>
                                     </li>
                                 @endif
                             @endif
-                            @if ($user->level == 'childAdmin')
-                                <li>
-                                    <a onclick="remove_from_admin.showModal()">Remove Admin</a>
-                                </li>
-                            @endif
-                        @endif
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
+                @endif
             @endif
         </div>
         <div class="flex mt-3">
@@ -53,10 +56,16 @@
                     {{ $user->name }}
 
                     <div class="text-gray-500 uppercase ps-3">
-                        @if (Auth::user()->id != $user->id)
-                            <button class="" onclick="follow({{ $user->id }}, this)">
-                                {{ Auth::user()->following->contains($user->id) ? 'UNFOLLOW' : 'FOLLOW' }}
-                            </button>
+                        @if (Auth::user())
+                            @if (Auth::user()->id != $user->id)
+                                <button class="" onclick="follow({{ $user->id }}, this)">
+                                    {{ Auth::user()->following->contains($user->id) ? 'UNFOLLOW' : 'FOLLOW' }}
+                                </button>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}">
+                                FOLLOW
+                            </a>
                         @endif
                     </div>
                 </h2>

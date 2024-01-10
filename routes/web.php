@@ -13,8 +13,11 @@ use App\Http\Controllers\Tweet\TweetStoreController;
 use App\Http\Controllers\Tweet\TweetUpdateController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', DashboardController::class)->name('dashboard');
+Route::get('/search/', SearchTweetController::class)->name('search');
+Route::get('profile/@{name}', [ProfileController::class, 'show'])->name('profile.show');
+
 Route::middleware('auth')->group(function () {
-    Route::get('/', DashboardController::class)->name('dashboard');
     Route::get('tweet/create', TweetCreateController::class)->name('tweet.create');
     Route::post('tweet/store', TweetStoreController::class)->name('tweet.store');
     Route::get('tweet/show/{id}', TweetShowController::class)->name('tweet.show');
@@ -24,13 +27,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/like/{id}', [LikeController::class, 'toggle']);
     Route::get('/favorite/{id}', [FavoriteController::class, 'toggle']);
-    Route::get('/search/', SearchTweetController::class)->name('search');
     Route::get('/follow/{user_id}', [ProfileController::class, 'follow'])->name('user.follow');
 
     Route::put('ToAdmin/{id}', [ProfileController::class, 'toAdmin'])->name('toAdmin');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::get('profile/@{name}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

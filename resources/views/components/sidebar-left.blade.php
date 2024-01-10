@@ -10,15 +10,27 @@
                 <a href="{{ route('profile.index') }}"
                     class="flex items-center text-white rounded-lg   dark:hover:bg-gray-700 group">
                     <div class="text-4xl">
-                        <img class="w-9 h-9 object-cover rounded-full"
-                            src="{{ Auth::user()->avatar ? asset('images/avatar/' . Auth::user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
-                            alt="{{ url('https://ui-avatars.com/api/?name=' . Auth::user()->name) }}">
+                        @if (Auth::user())
+                            <img class="w-9 h-9 object-cover rounded-full"
+                                src="{{ Auth::user()->avatar ? asset('images/avatar/' . Auth::user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
+                                alt="{{ url('https://ui-avatars.com/api/?name=' . Auth::user()->name) }}">
+                        @else
+                            <img class="w-9 h-9 object-cover rounded-full" src="https://ui-avatars.com/api/?name=guest">
+                        @endif
                     </div>
                     <div class="ms-3">
-                        {{ Auth::user()->name }}
+                        @if (Auth::user())
+                            {{ Auth::user()->name }}
+                        @else
+                            Guest
+                        @endif
                     </div>
                 </a>
-                <div class="w-2/3 h-1 rounded-md mt-3 bg-teal-700"></div>
+                @if (Auth::user())
+                    <div class="w-2/3 h-1 rounded-md mt-3 bg-teal-700"></div>
+                @else
+                    <div class="w-2/3 h-1 rounded-md mt-3 bg-teal-900"></div>
+                @endif
             </li>
             <li class="my-1">
                 <a href="{{ route('dashboard') }}"
@@ -38,6 +50,17 @@
                     <span class="ms-3">Create</span>
                 </a>
             </li>
+            @if (!Auth::user())
+                <li>
+                    <a href="{{ route('login') }}"
+                        class="flex pt-1 text-white rounded-lg bg-blue-500 dark:hover:bg-blue-700 group">
+                        <div class="text-4xl ">
+                            <iconify-icon icon="material-symbols:login"></iconify-icon>
+                        </div>
+                        <span class="ms-3 pt-2">Log In</span>
+                    </a>
+                </li>
+            @endif
         </ul>
     </div>
 </aside>

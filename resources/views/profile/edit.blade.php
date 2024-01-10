@@ -1,3 +1,4 @@
+@section('title', 'Edit Profile')
 <x-app-layout>
     <div class="px-3">
         <div class="lg:w-3/5 lg:bg-gray-800 pb-3 mx-auto sm:px-6 lg:px-8 space-y-6 py-3 bg-dark text-white">

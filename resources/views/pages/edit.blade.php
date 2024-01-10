@@ -1,6 +1,4 @@
-@section('title')
-    Edit - {{ $tweet->content }}
-@endsection
+@section('title', 'Edit Tweet')
 <x-app-layout>
     <div class="py-6 px-3 lg:w-3/5 mx-auto">
         <div class="lg:border-2 md:border-gray-800 md:p-3 md:bg-gray-800">

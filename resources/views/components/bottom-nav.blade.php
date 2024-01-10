@@ -16,9 +16,13 @@
     </x-bottom-nav-link>
 
     <a href="{{ route('profile.index') }}">
-        <img class="mt-1 {{ request()->routeIs('profile.index') ? 'ring-cyan-500 border-2 border-cyan-500 rounded-full w-9 h-9 object-cover' : 'w-9 h-9 object-cover rounded-full' }}"
-            src="{{ Auth::user()->avatar ? asset('images/avatar/' . Auth::user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
-            alt="{{ url('https://ui-avatars.com/api/?name=' . Auth::user()->name) }}">
+        @if (Auth::user())
+            <img class="mt-1 {{ request()->routeIs('profile.index') ? 'ring-cyan-500 border-2 border-cyan-500 rounded-full w-9 h-9 object-cover' : 'w-9 h-9 object-cover rounded-full' }}"
+                src="{{ Auth::user()->avatar ? asset('images/avatar/' . Auth::user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
+                alt="{{ url('https://ui-avatars.com/api/?name=' . Auth::user()->name) }}">
+        @else
+            <img class="w-8 h-8 object-cover rounded-full" src="https://ui-avatars.com/api/?name=guest">
+        @endif
     </a>
 </div>
 

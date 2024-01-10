@@ -1,3 +1,4 @@
+@section('title', 'PiBoard')
 <x-app-layout>
     <div id="data-wrapper">
         @foreach ($tweets as $tweet)

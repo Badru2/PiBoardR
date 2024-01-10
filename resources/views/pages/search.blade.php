@@ -1,3 +1,4 @@
+@section('title', 'Search')
 <x-app-layout>
     @foreach ($users as $user)
         <div class="flex mx-3 py-4 lg:w-3/5 lg:mx-auto rounded-lg mb-3 bg-gray-800">
@@ -9,10 +10,16 @@
             <div class="ps-3">
                 <a href="{{ route('profile.show', $user->name) }}">{{ $user->name }}</a>
                 <div class="text-gray-500 uppercase ">
-                    @if (Auth::user()->id != $user->id)
-                        <button class="" onclick="follow({{ $user->id }}, this)">
-                            {{ Auth::user()->following->contains($user->id) ? 'UNFOLLOW' : 'FOLLOW' }}
-                        </button>
+                    @if (Auth::user())
+                        @if (Auth::user()->id != $user->id)
+                            <button class="" onclick="follow({{ $user->id }}, this)">
+                                {{ Auth::user()->following->contains($user->id) ? 'UNFOLLOW' : 'FOLLOW' }}
+                            </button>
+                        @endif
+                    @else
+                        <a href="{{ route('login') }}">
+                            FOLLOW
+                        </a>
                     @endif
                 </div>
             </div>

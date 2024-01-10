@@ -74,34 +74,46 @@
 
     <div class="border-black border-t-2 border-b-2 mt-4 flex justify-evenly">
         {{-- Like --}}
-        <a class="m-2 text-xl cursor-pointer text-danger" onclick="like({{ $tweet->id }}, this)">
-            @if ($tweet->is_liked())
-                <iconify-icon icon="material-symbols-light:favorite"></iconify-icon>
-            @else
+        @if (Auth::user())
+            <a class="m-2 text-xl cursor-pointer text-red-600" onclick="like({{ $tweet->id }}, this)">
+                @if ($tweet->is_liked())
+                    <iconify-icon icon="material-symbols-light:favorite"></iconify-icon>
+                @else
+                    <iconify-icon icon="material-symbols:favorite-outline"></iconify-icon>
+                @endif
+                {{-- {{ $tweet->likes->count() }} --}}
+            </a>
+        @else
+            <a href="{{ route('login') }}" class="m-2 text-xl cursor-pointer text-red-600">
                 <iconify-icon icon="material-symbols:favorite-outline"></iconify-icon>
-            @endif
-            {{-- {{ $tweet->likes->count() }} --}}
-        </a>
+            </a>
+        @endif
 
         {{-- Comment --}}
         <a onclick="comment_{{ $tweet->id }}.showModal()"
-            class="m-2 text-xl text-white cursor-pointer"><iconify-icon icon="bx:comment"></iconify-icon>
+            class="m-2 text-xl text-blue-300 cursor-pointer"><iconify-icon icon="bx:comment"></iconify-icon>
             {{-- {{ $tweet->comments->count() }} --}}
         </a>
 
         {{-- Share inactive --}}
-        <a href="{{ route('tweet.show', $tweet->id) }}" class="m-2 text-xl text-white"><iconify-icon
+        <a href="{{ route('tweet.show', $tweet->id) }}" class="m-2 text-xl text-blue-600"><iconify-icon
                 icon="ri:share-line"></iconify-icon></a>
 
-        {{-- Favorite inactive --}}
-        <a class="m-2 text-xl cursor-pointer text-danger" onclick="favorite({{ $tweet->id }}, this)">
-            @if ($tweet->is_favorited())
-                <iconify-icon icon="material-symbols:bookmark"></iconify-icon>
-            @else
+        @if (Auth::user())
+            <a class="m-2 text-xl cursor-pointer text-green-500" onclick="favorite({{ $tweet->id }}, this)">
+                @if ($tweet->is_favorited())
+                    <iconify-icon icon="material-symbols:bookmark"></iconify-icon>
+                @else
+                    <iconify-icon icon="material-symbols:bookmark-outline"></iconify-icon>
+                @endif
+                {{-- {{ $tweet->likes->count() }} --}}
+            </a>
+        @else
+            <a href="{{ route('login') }}" class="m-2 text-xl cursor-pointer text-green-500">
                 <iconify-icon icon="material-symbols:bookmark-outline"></iconify-icon>
-            @endif
-            {{-- {{ $tweet->likes->count() }} --}}
-        </a>
+            </a>
+        @endif
+        {{-- Favorite inactive --}}
     </div>
 
     {{-- Image Tweet Modal --}}
