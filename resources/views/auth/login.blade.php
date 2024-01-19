@@ -3,7 +3,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <h1 class="font-extrabold text-xl lg:hidden text-center text-black py-4">SMK PRAKARYA INTERNASIONAL</h1>
+    <h1 class="font-extrabold text-xl xl:text-2xl lg:hidden text-center text-black py-4">SMK PRAKARYA INTERNASIONAL</h1>
     <h1 class="hidden font-extrabold text-2xl lg:block text-center text-black py-4">SMK <br> PRAKARYA INTERNASIONAL</h1>
 
     <form method="POST" action="{{ route('login') }}">
@@ -12,8 +12,8 @@
         <!-- Email Address -->
         <div>
             {{-- <x-input-label for="email" :value="__('Email')" /> --}}
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
-                autofocus autocomplete="username" placeholder="Email" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus
+                autocomplete="username" placeholder="Email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -21,8 +21,8 @@
         <div class="mt-4">
             {{-- <x-input-label for="password" :value="__('Password')" /> --}}
 
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                autocomplete="current-password" placeholder="Password" />
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password"
+                placeholder="Password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -50,8 +50,7 @@
             Login
         </button>
 
-        <p class="text-center text-black mt-7 mb-3">Belum Punya akun? <a href="{{ route('register') }}"
-                class="text-blue-800">Sign
+        <p class="text-center text-black mt-7 mb-3">Belum Punya akun? <a href="{{ route('register') }}" class="text-blue-800">Sign
                 Up</a>
         </p>
     </form>

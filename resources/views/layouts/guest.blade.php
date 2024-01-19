@@ -56,10 +56,10 @@
         </div>
 
         <div class="hidden lg:block w-2/5 text-white ps-4">
-            <img src="{{ asset('icon_white.svg') }}" class="w-72" alt="">
-            <div class="w-40 h-2 rounded-full primary-red my-4"></div>
-            <h1 class="text-3xl">Selamat Datang Di</h1>
-            <h1 class="text-3xl font-extrabold">PI Board</h1>
+            <img src="{{ asset('icon_white.svg') }}" class="w-72 xl:w-96" alt="">
+            <div class="w-40 xl:w-64 h-2 rounded-full primary-red my-4"></div>
+            <h1 class="text-3xl xl:text-5xl">Selamat Datang Di</h1>
+            <h1 class="text-3xl xl:text-5xl font-extrabold">PI Board</h1>
         </div>
 
         <div class="lg:w-3/5 lg:h-screen primary-blue-lg primary-red-left flex">

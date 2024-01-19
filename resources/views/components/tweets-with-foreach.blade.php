@@ -1,5 +1,5 @@
 @foreach ($tweets as $tweet)
-    <div class="p-3 mb-5 mx-3 lg:w-2/5 xl:w-3/5 lg:mx-auto lg:border-2 lg:border-gray-800 bg-gray-800 relative">
+    <div class="p-3 mb-5 mx-3 lg:w-2/5 xl:w-2/5 lg:mx-auto lg:border-2 lg:border-gray-800 bg-gray-800 relative">
         <div class="flex">
             <div class="me-2">
                 <a href="{{ route('profile.show', $tweet->user->name) }}" class="text-white">
@@ -36,8 +36,7 @@
                             </li>
                         @endcan
                         @cannot('view', $tweet)
-                            <li><button onclick="report_{{ $tweet->id }}.showModal()"
-                                    class="text-warning">Report</button>
+                            <li><button onclick="report_{{ $tweet->id }}.showModal()" class="text-warning">Report</button>
                             </li>
                         @endcannot
                     </ul>
@@ -50,8 +49,8 @@
         <div class="text-center">
             @if (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'mp4' || pathinfo($tweet->file, PATHINFO_EXTENSION) == 'webm')
                 <!-- video -->
-                <video id="myVideo" src="{{ asset('/storage/tweets/' . $tweet->file) }}" disablepictureinpicture
-                    controlslist="nodownload" controls class="w-full mx-auto rounded"></video>
+                <video id="myVideo" src="{{ asset('/storage/tweets/' . $tweet->file) }}" disablepictureinpicture controlslist="nodownload"
+                    controls class="w-full mx-auto rounded"></video>
             @elseif (pathinfo($tweet->file, PATHINFO_EXTENSION) == 'mp3' ||
                     pathinfo($tweet->file, PATHINFO_EXTENSION) == 'ogg' ||
                     pathinfo($tweet->file, PATHINFO_EXTENSION) == 'wav')
@@ -66,8 +65,7 @@
                     pathinfo($tweet->file, PATHINFO_EXTENSION) == 'svg' ||
                     pathinfo($tweet->file, PATHINFO_EXTENSION) == 'gif')
                 <!-- gambar -->
-                <img src="{{ asset('/storage/tweets/' . $tweet->file) }}"
-                    class="rounded mx-auto w-full max-h-96 2xl:max-h-96 object-cover"
+                <img src="{{ asset('/storage/tweets/' . $tweet->file) }}" class="rounded mx-auto w-full max-h-96 2xl:max-h-96 object-cover"
                     onclick="my_modal_{{ $tweet->id }}.showModal()" alt="">
             @else
                 <div></div>
@@ -92,8 +90,8 @@
             @endif
 
             {{-- Comment --}}
-            <a onclick="comment_{{ $tweet->id }}.showModal()"
-                class="m-2 text-xl text-blue-300 cursor-pointer"><iconify-icon icon="bx:comment"></iconify-icon>
+            <a onclick="comment_{{ $tweet->id }}.showModal()" class="m-2 text-xl text-blue-300 cursor-pointer"><iconify-icon
+                    icon="bx:comment"></iconify-icon>
                 {{-- {{ $tweet->comments->count() }} --}}
             </a>
 

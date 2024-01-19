@@ -7,8 +7,7 @@
         </a>
         <ul class="space-y-2 font-medium">
             <li class="my-5 mt-12">
-                <a href="{{ route('profile.index') }}"
-                    class="flex items-center text-white rounded-lg   dark:hover:bg-gray-700 group">
+                <a href="{{ route('profile.index') }}" class="flex items-center text-white rounded-lg   dark:hover:bg-gray-700 group">
                     <div class="text-4xl">
                         @if (Auth::user())
                             <img class="w-9 h-9 object-cover rounded-full"
@@ -33,8 +32,7 @@
                 @endif
             </li>
             <li class="my-1">
-                <a href="{{ route('dashboard') }}"
-                    class="flex items-center text-white rounded-lg dark:hover:bg-gray-700 group">
+                <a href="{{ route('dashboard') }}" class="flex items-center text-white rounded-lg dark:hover:bg-gray-700 group">
                     <div class="text-4xl">
                         <iconify-icon icon="uil:home"></iconify-icon>
                     </div>
@@ -42,8 +40,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('tweet.create') }}"
-                    class="flex items-center text-white rounded-lg dark:hover:bg-gray-700 group">
+                <a href="{{ route('tweet.create') }}" class="flex items-center text-white rounded-lg dark:hover:bg-gray-700 group">
                     <div class="text-4xl">
                         <iconify-icon icon="material-symbols:upload"></iconify-icon>
                     </div>
@@ -52,8 +49,7 @@
             </li>
             @if (!Auth::user())
                 <li>
-                    <a href="{{ route('login') }}"
-                        class="flex pt-1 text-white rounded-lg bg-blue-500 dark:hover:bg-blue-700 group">
+                    <a href="{{ route('login') }}" class="flex pt-1 text-white rounded-lg bg-blue-500 dark:hover:bg-blue-700 group">
                         <div class="text-4xl ">
                             <iconify-icon icon="material-symbols:login"></iconify-icon>
                         </div>

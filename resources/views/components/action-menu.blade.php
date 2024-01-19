@@ -1,4 +1,4 @@
-<div class="border-black border-t-2 border-b-2 mt-4 flex justify-evenly">
+<div class="flex mt-4 border-t-2 border-b-2 border-black justify-evenly">
     {{-- Like --}}
     <a class="m-2 text-xl cursor-pointer text-danger" onclick="like({{ $tweet->id }}, this)">
         @if ($tweet->is_liked())
@@ -16,7 +16,9 @@
     </a>
 
     {{-- Share inactive --}}
-    <a href="{{ route('tweet.show', $tweet->id) }}" class="m-2 text-xl text-white"><iconify-icon
+    <input type="text" id="copy_{{ $tweet->id }}" value="{{ route('tweet.show' . $tweet->id) }}" class="absolute left-[-1000px]"
+        readonly>
+    <a value="copy" onclick="copyToClipboard('copy_{{ $tweet->id }}')" class="m-2 text-xl text-white"><iconify-icon
             icon="ri:share-line"></iconify-icon></a>
 
     {{-- Favorite inactive --}}
